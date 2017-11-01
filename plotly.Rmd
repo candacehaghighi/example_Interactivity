@@ -1,0 +1,46 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A - scatter
+
+```{r}
+airbnb %>%
+  mutate(hover_text = str_c("Price: $", price)) %>% 
+  plot_ly(x = ~longitude, y = ~latitude, color = ~price,
+          alpha = 0.5, 
+          text = ~hover_text, type = "scatter", mode = "markers")
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B - Box Plot
+
+```{r}
+airbnb %>%
+  mutate(neighbourhood = fct_reorder(neighbourhood, price)) %>% 
+  plot_ly(x = ~neighbourhood, y = ~price, color = ~neighbourhood, type = "box",
+          colors = "Set2" )
+```
+
+### Chart C - BarChart
+
+```{r}
+airbnb %>%
+  count(neighbourhood) %>% 
+  mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>% 
+  plot_ly(x = ~neighbourhood, y = ~n, color = ~neighbourhood, type = "bar")
+```
+
