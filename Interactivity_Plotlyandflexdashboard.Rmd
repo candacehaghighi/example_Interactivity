@@ -15,3 +15,32 @@ library(forcats)
 library(viridis)
 library(plotly)
 ```
+
+```{r}
+airbnb = read_csv("./Data/nyc_airbnb.zip") %>%
+  clean_names() %>%
+  rename(boro = neighbourhood_group) %>%
+  mutate(rating = review_scores_location/2) %>%
+  filter(boro == "Manhattan", 
+     room_type == "Entire home/apt",
+     price > 100 & price < 400) 
+```
+
+##Plotly scatterplot. "\N" means create a new line. 
+
+```{r}
+airbnb %>%
+  mutate(hover_text = str_c("Price: $", price)) %>% 
+  plot_ly(x = ~longitude, y = ~latitude, color = ~price,
+          alpha = 0.5, 
+          text = ~hover_text, type = "scatter", mode = "markers")
+```
+
+##Plotly boxplot
+
+```{r}
+airbnb %>%
+  mutate(neighbourhood = fct_reorder(neighbourhood, price)) %>% 
+  plot_ly(x = ~neighbourhood, y = ~price, color = ~neighbourhood, type = "box",
+          colors = "Set2" )
+```
