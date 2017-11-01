@@ -44,3 +44,30 @@ airbnb %>%
   plot_ly(x = ~neighbourhood, y = ~price, color = ~neighbourhood, type = "box",
           colors = "Set2" )
 ```
+
+##Plotly barchart
+
+```{r}
+airbnb %>%
+  count(neighbourhood) %>% 
+  mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>% 
+  plot_ly(x = ~neighbourhood, y = ~n, color = ~neighbourhood, type = "bar")
+```
+
+##GGPlotly
+
+```{r}
+scatter_ggplot = airbnb %>%
+  ggplot(aes(x = longitude, y = latitude, color = price)) +
+  geom_point(alpha = 0.25) +
+  scale_color_viridis() +
+  coord_cartesian() +
+  theme_classic()
+ggplotly(scatter_ggplot)
+```
+
+##Dashboards. R studio is not doing the right thing locally. Workaround - if want to use dashboard, rebuild everytime. 
+
+```{r}
+library(flexdashboard)
+```
