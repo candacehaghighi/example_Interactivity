@@ -1,0 +1,17 @@
+---
+title: "Interactivity_Plotlyandflexdashboard"
+author: "Candace Haghighi"
+date: "11/1/2017"
+output: html_document
+---
+
+>Libraries 
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(stringr)
+library(forcats)
+library(viridis)
+library(plotly)
+```
