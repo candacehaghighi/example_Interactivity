@@ -50,7 +50,7 @@ airbnb %>%
 ```{r}
 airbnb %>%
   count(neighbourhood) %>% 
-  mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>% 
+  mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>%
   plot_ly(x = ~neighbourhood, y = ~n, color = ~neighbourhood, type = "bar")
 ```
 
