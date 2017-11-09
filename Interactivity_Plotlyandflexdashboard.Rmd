@@ -9,6 +9,7 @@ output: html_document
 
 ```{r}
 library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
 library(janitor)
 library(stringr)
 library(forcats)
